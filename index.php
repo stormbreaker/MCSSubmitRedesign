@@ -4,9 +4,9 @@
 		<?php
 			require 'user.php';
 
-			if (User::isAuthenticated())
+			if (true)//User::isAuthenticated())
 			{
-				header("Location: submit.php");
+				header("Location: submittest.html");
 			}
 			else
 			{
