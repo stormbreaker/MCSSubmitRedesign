@@ -6,7 +6,7 @@
 
 			if (true)//User::isAuthenticated())
 			{
-				header("Location: submittest.html");
+				header("Location: submit.html");
 			}
 			else
 			{
