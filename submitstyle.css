@@ -19,6 +19,8 @@
     background-color: #B3A369;
     display: block;
     padding: 10px 10px;
+    margin-top: 10px;
+    margin-left: -5px;
 }
 
 .dropdown:hover
