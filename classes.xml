@@ -1,0 +1,25 @@
+<!DOCTYPE prof-course SYSTEM "prof-course.dtd">
+<prof-course>
+    <professor>
+        <class>
+            CSC 372
+        </class>
+        <class>
+            CSC 470
+        </class>
+        <name>
+            Antonette Logar
+        </name>
+    </professor>
+    <professor>
+        <class>
+            CSC 470
+        </class>
+        <class>
+            CSC 300
+        </class>
+        <name>
+            Paul Hinker
+        </name>
+    </professor>
+</prof-course>
