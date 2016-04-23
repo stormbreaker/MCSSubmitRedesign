@@ -25,6 +25,7 @@ function AddTeamMember()
     var newDiv = document.createElement("div");
     var divText = document.createElement("input");
     divText.type = "text";
+    newDiv.className = "teamMember";
 
     var divXButton = document.createElement("button");
     divXButton.appendChild(document.createTextNode("X"));

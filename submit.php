@@ -8,7 +8,14 @@
 	else if (isset($_POST['submit']))
 	{
         $fileName = $_FILES["file1"]["name"];
-		$newFilePath = "uploads/" . User::getUsername() . $fileName;
+		$instructor = $_POST['Instructor'];
+		$class = $_POST['Class'];
+		$newFilePath = "submit/" . $instructor . "/" . $class . "/";
+		if (is_dir($newFilePath) == false)
+		{
+			mkdir($newFilePath);
+		}
+		$newFilePath = $newFilePath . "/" . User::getUsername() . "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
 		$tempFilePath = $newFilePath;
 		$canUpload = 1;
 		$index = 1;
