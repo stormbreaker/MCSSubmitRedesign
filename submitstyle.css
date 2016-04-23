@@ -2,6 +2,8 @@
     Mines Blue #071D49
     Mines Gold #B3A369
 */
+
+
 .dropdown-content
 {
     display: none;
@@ -27,15 +29,14 @@
 
 .minesGold
 {
-    background-color: #B3A369
+    background-color: #B3A369;
 }
 .minesBlue
 {
-    background-color: #071D49
+    background-color: #071D49;
 }
 .centerLR
 {
-    /*align-items: center;*/
     text-align: center;
 }
 
