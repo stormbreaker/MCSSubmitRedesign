@@ -22,4 +22,18 @@
             Paul Hinker
         </name>
     </professor>
+    <professor>
+        <class>
+            CSC 468
+        </class>
+        <class>
+            CSC 447
+        </class>
+        <class>
+            CSC 461
+        </class>
+        <name>
+            John Weiss
+        </name>
+    </professor>
 </prof-course>
