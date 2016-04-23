@@ -7,6 +7,9 @@
 	}
 	else if (isset($_POST['submit']))
 	{
+        $professorName = $_POST["InstructorCombo"];
+        $className = $_POST["ClassCombo"];
+
         $fileName = $_FILES["file1"]["name"];
 		$newFilePath = "uploads/" . User::getUsername() . $fileName;
 		$tempFilePath = $newFilePath;
@@ -62,44 +65,36 @@
 
             <p>Please select single or team project</p>
 
-            <input type="radio" name="gender" value="single" checked="checked" onchange="PickProjectType(this.value)"> Single Project </input>
-            <input type="radio" name="gender" value="team" onchange="PickProjectType(this.value)"> Team Project </input>
+            <form action="submit.php" method="post" enctype="multipart/form-data">
+                <input type="radio" name="gender" value="single" checked="checked" onchange="PickProjectType(this.value)"> Single Project </input>
+                <input type="radio" name="gender" value="team" onchange="PickProjectType(this.value)"> Team Project </input>
 
-            <div id="TeamProjectDiv" style="display:none">
-                <p>Please add your team members StudentID numbers</p>
+                <div id="TeamProjectDiv" style="display:none">
+                    <p>Please add your team members StudentID numbers</p>
 
-                <input type="button" value="Add Team Member" onclick="AddTeamMember()"/>
+                    <input type="button" value="Add Team Member" onclick="AddTeamMember()"/>
 
-                <div id="MemberDiv">
-                    <!-- Where the team members will be added -->
+                    <div id="MemberDiv">
+                        <!-- Where the team members will be added -->
+                    </div>
                 </div>
 
+                <p>Please choose an instructor first. After an instructor is selected then choose the desired course.<br/>
+                   NOTE: The course listing will only list courses taught by the selected instructor.</p>
+
+                <select name="InstructorCombo" id="InstructorCombo" onchange="SetClasses(this)">
+                    <option> Choose Instructor </option>
+                    <option> ----------------- </option>
+                </select>
+
+                <select name="ClassCombo" id="ClassCombo">
+                    <option> Choose Class </option>
+                    <option> ------------ </option>
+                </select>
+
                 <br/>
-            </div>
+                <br/>
 
-            <p>Please choose an instructor first. After an instructor is selected then choose the desired course.<br/>
-               NOTE: The course listing will only list courses taught by the selected instructor.</p>
-
-            <select>
-                <option> Choose Instructor </option>
-                <option> ----------------- </option>
-                <option> Hinker </option>
-                <option> Karlsson </option>
-                <option> Logar </option>
-                <option> Weiss </option>
-            </select>
-
-            <select>
-                <option> CSC470 </option>
-                <option> CSC317 </option>
-                <option> CSC300 </option>
-                <option> CSC481 </option>
-            </select>
-
-            <br/>
-            <br/>
-
-            <form action="submit.php" method="post" enctype="multipart/form-data">
             	<label for="file">Browse for file:</label>
             	<input type="file" name="file1" id="file" />
             	<br /> <br/>
