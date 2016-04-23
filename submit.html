@@ -8,47 +8,105 @@
     <body>
     <!-- code for the clickable dropdown -->
         <script>
-            function myFunction()
+            function PickProjectType(radioValue)
             {
-                var docDisplay = document.getElementById("myDropdown").style.display;
+                var memberDiv = document.getElementById("MemberDiv");
 
-                if (docDisplay == "none")
+                if (radioValue == "single")
                 {
-                    document.getElementById("myDropdown").style.display = "block";
+                    document.getElementById("TeamProjectDiv").style.display = "none";
+
+                    while (memberDiv.children.length != 0)
+                    {
+                        RemoveTeamMember(memberDiv.children.length - 1);
+                    }
                 }
                 else
                 {
-                    document.getElementById("myDropdown").style.display = "none";
+                    document.getElementById("TeamProjectDiv").style.display = "block";
+
+                    AddTeamMember();
                 }
+            }
+
+            function AddTeamMember()
+            {
+                var memberDiv = document.getElementById("MemberDiv");
+                var newDiv = document.createElement("div");
+                var divText = document.createElement("input");
+                divText.type = "text";
+
+                var divXButton = document.createElement("button");
+                divXButton.appendChild(document.createTextNode("X"));
+
+                divXButton.onclick = function()
+                {
+                    var index = Array.prototype.indexOf.call(memberDiv.children, newDiv);
+
+                    RemoveTeamMember(index);
+                }
+
+                newDiv.appendChild(divText);
+                newDiv.appendChild(divXButton);
+
+                memberDiv.appendChild(newDiv);
+            }
+
+            function RemoveTeamMember(numToDelete)
+            {
+                var memberDiv = document.getElementById("MemberDiv");
+
+                memberDiv.removeChild(memberDiv.children[numToDelete]);
             }
         </script>
 
-        <div class="centerLR">
-            <img src="SDSMT_LOGO.png" width="75"/>
-            <br/>
-            <div class="minesGold">
-                <div class="dropdown"> <a>Alumni</a> </div>
-                <div class="dropdown"> <a>Directory</a> </div>
-                <div class="dropdown"> <a>Faculty</a> </div>
-                <div class="dropdown"> <a>Login</a> </div>
-                <div class="dropdown"> <a>Map</a> </div>
-                <div class="dropdown"> <a>Policy</a> </div>
-                <div class="dropdown"> <a>Program</a> </div>
+        <header>
+            <div class="centerLR">
+                <img src="SDSMT_LOGO.png" width="75"/>
+                <br/>
+                <div class="minesGold">
+                    <div class="dropdown"> <a>Alumni</a> </div>
+                    <div class="dropdown"> <a>Directory</a> </div>
+                    <div class="dropdown"> <a>Faculty</a> </div>
+                    <div class="dropdown"> <a>Login</a> </div>
+                    <div class="dropdown"> <a>Map</a> </div>
+                    <div class="dropdown"> <a>Policy</a> </div>
+                    <div class="dropdown"> <a>Program</a> </div>
 
-                <div class="dropdown">
-                    <a ><!--onclick="myFunction()"-->Research</a>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="sinkhole.html">Checklist</a><br/>
-                        <a href="sinkhole.html">Courses</a><br/>
-                        <a href="sinkhole.html">Scheduler</a>
+                    <div class="dropdown">
+                        <a ><!--onclick="myFunction()"-->Research</a>
+                        <div class="dropdown-content" id="myDropdown">
+                            <a href="sinkhole.html">Checklist</a><br/>
+                            <a href="sinkhole.html">Courses</a><br/>
+                            <a href="sinkhole.html">Scheduler</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
 
         <div>
-            <br/>
-            <br/>
+            <h2> Welcome to Submit It!</h2>
+
+            <p>Please select single or team project</p>
+
+            <input type="radio" name="gender" value="single" checked="checked" onchange="PickProjectType(this.value)"> Single Project </input>
+            <input type="radio" name="gender" value="team" onchange="PickProjectType(this.value)"> Team Project </input>
+
+            <div id="TeamProjectDiv" style="display:none">
+                <p>Please add your team members StudentID numbers</p>
+
+                <input type="button" value="Add Team Member" onclick="AddTeamMember()"/>
+
+                <div id="MemberDiv">
+                    <!-- Where the team members will be added -->
+                </div>
+
+                <br/>
+            </div>
+
+            <p>Please choose an instructor first. After an instructor is selected then choose the desired course.<br/>
+               NOTE: The course listing will only list courses taught by the selected instructor.</p>
 
             <select>
                 <option> Choose Instructor </option>
@@ -66,7 +124,8 @@
                 <option> CSC481 </option>
             </select>
 
-            <br/><br/>
+            <br/>
+            <br/>
 
             <form action="submit.php" method="post" enctype="multipart/form-data">
             	<label for="file">Browse for file:</label>
