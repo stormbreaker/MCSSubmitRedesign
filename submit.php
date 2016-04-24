@@ -7,18 +7,30 @@
 	}
 	else if (isset($_POST['submit']))
 	{
+        $fileName = $_FILES["file1"]["name"];
         $professorName = $_POST["InstructorCombo"];
         $className = $_POST["ClassCombo"];
-
-        $fileName = $_FILES["file1"]["name"];
-		$instructor = $_POST['Instructor'];
-		$class = $_POST['Class'];
-		$newFilePath = "submit/" . $instructor . "/" . $class . "/";
-		if (is_dir($newFilePath) == false)
+		$newFilePath = "submit/" . $professorName . "/" . $className . "/";
+        
+		if (file_exists($newFilePath) == false)
 		{
-			mkdir($newFilePath);
+			mkdir($newFilePath, 0755, true);
 		}
-		$newFilePath = $newFilePath . "/" . User::getUsername() . "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
+
+		$newFilePath = $newFilePath . "/" . User::getUsername();
+
+        if ($_POST["project"] == "team")
+        {
+            $memberCount = $_POST["memberCount"];
+
+            for ($i = 0; $i < $memberCount; $i++)
+            {
+                $newFilePath = $newFilePath."_".$_POST["member".$i];
+            }
+        }
+
+        $newFilePath .= "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
+
 		$tempFilePath = $newFilePath;
 		$canUpload = 1;
 		$index = 1;
@@ -56,7 +68,7 @@
                     <div class="dropdown"> <a>Program</a> </div>
 
                     <div class="dropdown">
-                        <a ><!--onclick="myFunction()"-->Research</a>
+                        <a>Research</a>
                         <div class="dropdown-content" id="myDropdown">
                             <a href="sinkhole.html">Checklist</a><br/>
                             <a href="sinkhole.html">Courses</a><br/>
@@ -73,15 +85,16 @@
             <p>Please select single or team project</p>
 
             <form action="submit.php" method="post" enctype="multipart/form-data">
-                <input type="radio" name="gender" value="single" checked="checked" onchange="PickProjectType(this.value)"> Single Project </input>
-                <input type="radio" name="gender" value="team" onchange="PickProjectType(this.value)"> Team Project </input>
+                <input type="radio" name="project" value="single" checked="checked" onchange="PickProjectType(this.value)"> Single Project </input>
+                <input type="radio" name="project" value="team" onchange="PickProjectType(this.value)"> Team Project </input>
 
-                <div id="TeamProjectDiv" style="display:none">
+                <div name="TeamDiv" id="TeamProjectDiv" style="display:none">
                     <p>Please add your team members StudentID numbers</p>
 
                     <input type="button" value="Add Team Member" onclick="AddTeamMember()"/>
+                    <input type="text" name="memberCount" id="memberCount" style="display:none"/>
 
-                    <div id="MemberDiv">
+                    <div name="MemberDiv" id="MemberDiv">
                         <!-- Where the team members will be added -->
                     </div>
                 </div>
