@@ -3,15 +3,17 @@
 
 	if (isset($_POST['username']) && isset($_POST['password']))
 	{
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+    	$username = $_POST['username'];
+    	$password = $_POST['password'];
 
-	if (!User::authenticate($username, $password))
-	{
-		echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
-	}
-
-	header('Location: index.php');
+		if (!User::authenticate($username, $password))
+		{
+			echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
+		}
+		else
+		{
+			header("Location: index.php");
+		}
 	}
 	elseif (isset($_POST['logout']))
 	{
