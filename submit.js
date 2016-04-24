@@ -119,4 +119,9 @@ function SetClasses(sel)
     }
 }
 
+function LoginUser()
+{
+    var loginDiv = document.getElementById("LoginDiv").style.display = "none";
+}
+
 window.onload = function() { LoadProfessorsAndClasses(); };

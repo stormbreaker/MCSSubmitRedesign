@@ -16,7 +16,7 @@
 		$newFilePath = "submit/";
 		$newFilePath = $newFilePath . substr($names[0], 0, 1) . substr($names[1], 0, 7) . "/";
 		$newFilePath = $newFilePath . trim($className) . "/";
-		
+
 		if (file_exists($newFilePath))
 		{
 			if ($_POST["project"] == "team")
@@ -79,6 +79,15 @@
                             <a href="sinkhole.html">Scheduler</a>
                         </div>
                     </div>
+
+                    <div class="loginfields" id="LoginDiv">
+                        <label>Username: </label>
+                        <input type="text" id="UserName"/>
+                        <label>Password: </label>
+                        <input type="password" id="Password"/>
+
+                        <input type="button" value="Login" onclick="LoginUser();"/>
+                    </div>
                 </div>
             </div>
         </header>
@@ -95,7 +104,7 @@
                 <div name="TeamDiv" id="TeamProjectDiv" style="display:none">
                     <p>Please add your team members StudentID numbers</p>
 
-                    <input type="button" value="Add Team Member" onclick="AddTeamMember()"/>
+                    <input type="button" value="Add Team Member" onclick="AddTeamMember();"/>
                     <input type="text" name="memberCount" id="memberCount" style="display:none"/>
 
                     <div name="MemberDiv" id="MemberDiv">
