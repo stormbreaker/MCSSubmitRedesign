@@ -3,7 +3,7 @@
 	require 'user.php';
 	if (true)//User::isAuthenticated())
 	{
-		header("Location: submit.html");
+		header("Location: submit.php");
 	}
 	else
 	{

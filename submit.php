@@ -7,29 +7,35 @@
 	}
 	else if (isset($_POST['submit']))
 	{
+		date_default_timezone_set("America/Denver");
         $professorName = $_POST["InstructorCombo"];
         $className = $_POST["ClassCombo"];
-
         $fileName = $_FILES["file1"]["name"];
-		$instructor = $_POST['Instructor'];
-		$class = $_POST['Class'];
-		$newFilePath = "submit/" . $instructor . "/" . $class . "/";
-		if (is_dir($newFilePath) == false)
-		{
-			mkdir($newFilePath);
-		}
-		$newFilePath = $newFilePath . "/" . User::getUsername() . "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
-		$tempFilePath = $newFilePath;
-		$canUpload = 1;
-		$index = 1;
-		while (file_exists($tempFilePath)) {
-			$tempFilePath = $newFilePath . "(" . $index . ")";
-			$index = $index + 1;
-		}
-		$newFilePath = $tempFilePath;
-		move_uploaded_file($_FILES["file1"]["tmp_name"], $newFilePath);
+		$names = explode(" ", trim($professorName));
 
-        echo "<script type='text/javascript'>alert('$fileName' + ' was successfully uploaded!');</script>";
+		$newFilePath = "submit/";
+		$newFilePath = $newFilePath . substr($names[0], 0, 1) . substr($names[1], 0, 7) . "/";
+		$newFilePath = $newFilePath. trim($className) . "/";
+		if (file_exists($newFilePath))
+		{
+			$newFilePath = $newFilePath . User::getUsername() . "_" . date("m") . "-" . date("d") . "-" . date("y") . "_" . date("H") . "-" . date("i") . "-" . date("s") . "_" . $fileName;
+			$index = 1;
+			$tempFilePath = $newFilePath;
+			while (file_exists($tempFilePath)) {
+				$pathPieces = explode(".", $newFilePath);
+				$tempFilePath = $pathPieces[0] . "(" . $index . ")" . $pathPieces[1];
+				$index = $index + 1;
+			}
+
+			$newFilePath = $tempFilePath;
+			move_uploaded_file($_FILES["file1"]["tmp_name"], $newFilePath);
+
+			echo "<script type='text/javascript'>alert('$fileName' + ' was successfully uploaded!');</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>alert('$fileName' + ' was not uploaded successfully. Please try again.');</script>";
+		}
 	}
 ?>
 
