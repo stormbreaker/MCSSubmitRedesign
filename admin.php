@@ -46,7 +46,7 @@
                 chdir("..");
                 chdir("..");
                 $XMLDoc->load('classes.xml');
-                
+
                 //echo $XMLDoc->saveXML();
                 $root = $XMLDoc->documentElement;
 
@@ -55,7 +55,6 @@
                 $professornamestr = $_POST['first']." ".$_POST['last'];
 
                 $profname = $XMLDoc->createElement("name", $professornamestr);
-                $tempProf->appendChild($profname);
 
 
                 for ($i = 1; $i < $_POST['courseCount'] + 1; $i++)
@@ -70,7 +69,7 @@
 
 
                 }
-
+                $tempProf->appendChild($profname);
                 $root->appendChild($tempProf);
 
                 $XMLDoc->appendChild($root);

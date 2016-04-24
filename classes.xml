@@ -37,4 +37,4 @@
             John Weiss
         </name>
     </professor>
-<professor><name>roger schrader</name><class>150</class><class>250</class></professor></prof-course>
+<professor><class>CSC 150</class><name>Roger Schrader</name></professor></prof-course>
