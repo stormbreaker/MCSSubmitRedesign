@@ -3,15 +3,15 @@
 
 	if (isset($_POST['username']) && isset($_POST['password']))
 	{
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+    	$username = $_POST['username'];
+    	$password = $_POST['password'];
 
-	if (!User::authenticate($username, $password))
-	{
-		echo "<p>Login Failed, please try again.</p><br/>";
-	}
+    	if (!User::authenticate($username, $password))
+    	{
+    		echo "<p>Login Failed, please try again.</p><br/>";
+    	}
 
-	header('Location: index.php');
+    	header('Location: index.php');
 	}
 	elseif (isset($_POST['logout']))
 	{
