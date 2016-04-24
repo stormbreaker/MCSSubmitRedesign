@@ -15,7 +15,7 @@
         <input type="submit" value="Add Professor and Classes"/>
     </form>
     <?php
-
+        
     ?>
     </body>
 </html>

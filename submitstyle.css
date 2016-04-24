@@ -10,7 +10,7 @@
     position: absolute;
     text-align: left;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 50px;
     box-shadow: 10px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
@@ -18,7 +18,7 @@
 {
     background-color: #B3A369;
     display: block;
-    padding: 10px 10px;
+    padding: 5px 10px;
     margin-top: 10px;
     margin-left: -5px;
 }
@@ -49,8 +49,19 @@
     cursor: pointer; /*overrides php text thing*/
     padding: 10px 5px;
 }
+.dropdown-content a
+{
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+}
 .dropdown-content a:hover
 {
     background-color: #071D49;
     color: #ffffff;
+}
+
+.teamMember{
+    margin-top: 5px;
 }
