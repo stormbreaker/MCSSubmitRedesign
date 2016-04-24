@@ -16,8 +16,9 @@
             <div id="classDiv"><!--class numbers go here--></div>
             <br/>
             <br/>
-            <input type="submit" name="execute" value="Add Professor and Classes"/>
+            <input type="submit" name="execute" value="Add Professor and Classes" onclick="AddCourseDataML()"/>
             <input type="text"  name="courseCount" id="courseCount" value="0" style="display:none">
+            <input type="button" name="updatexml" id="updatexml" value="Update XML Doc" onclick="AddCourseDataML()"/>
         </form>
         <?php
             if(isset($_POST['execute']))
@@ -35,16 +36,18 @@
                 chdir($proffolder);
                 for ($i = 1; $i < $_POST['courseCount'] + 1; $i++)
                 {
-                    echo 'classNumber'.$i."<br>";
+                    //echo 'classNumber'.$i."<br>";
                     $courseName = $_POST['classNumber'.$i];
-                    echo $courseName."<br>";
-                    echo getcwd();
+                    //echo $courseName."<br>";
+                    //echo getcwd();
                     mkdir($courseName, 0755);
                 }
+                /*
                 foreach ($_POST as $key => $value)
                 {
                     echo $key."=> $value <br>";
                 }
+                */
             }
             else
             {
