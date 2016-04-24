@@ -36,7 +36,7 @@
                 for ($i = 1; $i < $_POST['courseCount'] + 1; $i++)
                 {
                     echo 'classNumber'.$i."<br>";
-                    $courseName = "dammit";//$_POST['classNumber'.$i];
+                    $courseName = $_POST['classNumber'.$i];
                     echo $courseName."<br>";
                     echo getcwd();
                     mkdir($courseName, 0755);
