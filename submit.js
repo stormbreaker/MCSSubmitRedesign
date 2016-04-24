@@ -23,11 +23,12 @@ function PickProjectType(radioValue)
 
 function AddTeamMember()
 {
+    var countTxt = document.getElementById("memberCount");
     var memberDiv = document.getElementById("MemberDiv");
     var newDiv = document.createElement("div");
     var divText = document.createElement("input");
     divText.type = "text";
-    newDiv.className = "teamMember";
+    divText.name = "member" + memberDiv.children.length;
 
     var divXButton = document.createElement("button");
     divXButton.appendChild(document.createTextNode("X"));
@@ -43,6 +44,8 @@ function AddTeamMember()
     newDiv.appendChild(divXButton);
 
     memberDiv.appendChild(newDiv);
+
+    countTxt.value = memberDiv.children.length;
 }
 
 function RemoveTeamMember(numToDelete)
