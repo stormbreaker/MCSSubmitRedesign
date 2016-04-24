@@ -125,7 +125,10 @@ abstract class User
      * return string The username string for the user. For students, this will
      *               be a student ID, whereas faculty will have a faculty ID.
      */
-    public abstract function getUsername();
+    public function getUsername()
+    {
+        return "test";
+    }
 
 
     /**
