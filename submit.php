@@ -7,10 +7,17 @@
 	}
 	else if (isset($_POST['submit']))
 	{
-        $newFilePath = "uploads/" . User::getUsername();
-        $teamMembers = [];
+        $fileName = $_FILES["file1"]["name"];
         $professorName = $_POST["InstructorCombo"];
         $className = $_POST["ClassCombo"];
+		$newFilePath = "submit/" . $professorName . "/" . $className . "/";
+        
+		if (file_exists($newFilePath) == false)
+		{
+			mkdir($newFilePath, 0755, true);
+		}
+
+		$newFilePath = $newFilePath . "/" . User::getUsername();
 
         if ($_POST["project"] == "team")
         {
@@ -22,19 +29,8 @@
             }
         }
 
-        $newFilePath = $newFilePath."_";
+        $newFilePath .= "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
 
-        $fileName = $_FILES["file1"]["name"];
-        $newFilePath = $newFilePath . $fileName;
-        $tempFilePath = $newFilePath;
-		$instructor = $_POST['Instructor'];
-		$class = $_POST['Class'];
-		$newFilePath = "submit/" . $instructor . "/" . $class . "/";
-		if (is_dir($newFilePath) == false)
-		{
-			mkdir($newFilePath);
-		}
-		$newFilePath = $newFilePath . "/" . User::getUsername() . "_" . date("d") . "_" . date("m") . "_" . date("y") . "_" . date("H") . ":" . date("i") . ":" . date("s") . "_" . $fileName;
 		$tempFilePath = $newFilePath;
 		$canUpload = 1;
 		$index = 1;
