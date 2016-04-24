@@ -49,6 +49,12 @@
     cursor: pointer; /*overrides php text thing*/
     padding: 10px 5px;
 }
+.loginfields
+{
+    position: relative;
+    display: inline-block;
+    padding: 20px 0px 0px 0px;
+}
 .dropdown-content a
 {
     color: black;
