@@ -6,7 +6,7 @@ function AddClass()
     var courseCounter = document.getElementById("courseCount");
     courseCounter.value = parseInt(courseCounter.value) + 1;
     divText.type = "text";
-    newDiv.name = "classNumber" + courseCounter.value;
+    divText.name = "classNumber" + courseCounter.value;
 
     var divXButton = document.createElement("button");
     divXButton.appendChild(document.createTextNode("X"));
