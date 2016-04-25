@@ -8,6 +8,7 @@
 	</head>
 
 	<body>
+		<!--Standard page header and navigation-->
 		<header>
 			<div class="minesGold">
 				<img src="MCS_LOGO.png" class="imageProperties"/>
@@ -31,7 +32,8 @@
 							<a href="submit.php">Submit It!</a>
 						</div>
 					</div>
-
+					
+					<!--Login fields-->
 					<span class="loginfields" id="LoginDiv">
 						<form id="LoginForm" method="post" action="login.php">
 							<label>Username: </label>
@@ -51,18 +53,22 @@
 		</header>
 <?php
 	require 'user.php';
-
+	
+	//If a file has not been chosen
 	if (isset($_FILES["file1"]) && $_FILES["file1"]["error"] > 0)
 	{
 		echo "<br/>You must select a file to upload!";
 	}
+	//If a file has been submitted
 	else if (isset($_POST['submit']))
 	{
 		date_default_timezone_set("America/Denver");
-        $professorName = $_POST["InstructorCombo"];
-        $className = $_POST["ClassCombo"];
-        $fileName = $_FILES["file1"]["name"];
+        	$professorName = $_POST["InstructorCombo"];
+        	$className = $_POST["ClassCombo"];
+        	$fileName = $_FILES["file1"]["name"];
 		$names = explode(" ", trim($professorName));
+		
+		//Ensure a professor and class have both been chosen
 		if ($professorName == "Choose Instructor" || $className == "Choose Class"
 			|| $className == "------------" || $professorName == "-----------------")
 		{
@@ -70,12 +76,15 @@
 		}
 		else
 		{
+			//Create the path to where the file will be saved
 			$newFilePath = "submit/";
 			$newFilePath = $newFilePath . substr($names[0], 0, 1) . substr($names[1], 0, 7) . "/";
 			$newFilePath = $newFilePath . trim($className) . "/";
 
+			//Make sure the file exists
 			if (file_exists($newFilePath))
 			{
+				//If this is a team project, prepend the file name with the name of each team member
 				if ($_POST["project"] == "team")
 				{
 					$memberCount = $_POST["memberCount"];
@@ -86,16 +95,19 @@
 					}
 				}
 
+				//Add the logged in user and the date and time to the file name
 				$newFilePath = $newFilePath . User::getUsername() . "_" . date("m") . "-" . date("d") . "-" . date("y") . "_" . date("H") . "-" . date("i") . "-" . date("s") . "_" . $fileName;
 				$index = 1;
 				$tempFilePath = $newFilePath;
-
+	
+				//If a file of the same name exists, add a (i) to the end of the file name, until it is a unique file
 				while (file_exists($tempFilePath)) {
 					$pathPieces = explode(".", $newFilePath);
 					$tempFilePath = $pathPieces[0] . "(" . $index . ")" . $pathPieces[1];
 					$index = $index + 1;
 				}
 
+				//Move the file to the correct folder
 				if (move_uploaded_file($_FILES["file1"]["tmp_name"], $newFilePath))
 				{
 					echo "<script type='text/javascript'>alert('$fileName' + ' was successfully uploaded!');</script>";
