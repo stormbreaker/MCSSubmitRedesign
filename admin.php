@@ -4,15 +4,56 @@
             Class Administration
         </title>
         <script type="text/javascript" src="admin.js"></script>
+        <link rel="stylesheet" type="text/css" href="submitstyle.css"/>
     </head>
     <body>
+		<header>
+			<div class="minesGold">
+				<!--Department Logo-->
+				<img src="MCS_LOGO.png" class="imageProperties"/>
+				<br/>
+				<!--Navigation Menu-->
+				<div>
+					<div class="dropdown"> <a href="index.html">Home</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Alumni</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Directory</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Faculty</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Map</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Policy</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Program</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Research</a> </div>
+					<!--Dropdown Navigation-->
+					<div class="dropdown">
+						<a>Student</a>
+						<div class="dropdown-content" id="myDropdown">
+							<a href="sinkhole.html">Checklist</a><br/>
+							<a href="sinkhole.html">Courses</a><br/>
+							<a href="sinkhole.html">Scheduler</a>
+							<a href="submit.php">Submit It!</a>
+						</div>
+					</div>
+					<!--Login Fields-->
+					<span class="loginfields" id="LoginDiv">
+						<label>Username: </label>
+						<input type="text" id="UserName"/>
+						<label>Password: </label>
+						<input type="password" id="Password"/>
+
+						<input type="button" value="Login" onclick="LoginUser();"/>
+					</span>
+				</div>
+			</div>
+		</header>
+		<br/>
 		<!--The html elements for professor and class administration-->
         <form action="admin.php" method="post">
-            <label for="first">Professor's First Name: </label>
+            <label style="display:inline-block; width:160px" for="first">Professor's First Name: </label>
             <input type="text" name="first" id="first"/>
-            <label for="last">Professor's Last Name: </label>
+			<br/>
+            <label style="margin-top: 5px; display:inline-block; width:160px" style="display:inline-block; width:80px" for="last">Professor's Last Name: </label>
             <input type="text" name="last" id="last"/>
-            <br>
+            <br/>
+            <br/>
             <input type="button" value="Add Course" onclick="AddClass()"/>
             <div id="classDiv"><!--class numbers go here--></div>
             <br/>
@@ -41,7 +82,7 @@
                     $courseName = $_POST['classNumber'.$i];
                     mkdir($courseName, 0755);
                 }
-                $XMLDoc = ne1w DOMDocument();
+                $XMLDoc = new DOMDocument();
 				//Navigate up two levels in the directory structure
                 chdir("..");
                 chdir("..");
