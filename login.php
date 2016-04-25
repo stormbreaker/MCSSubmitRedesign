@@ -1,28 +1,3 @@
-<?php
-	require 'user.php';
-
-	if (isset($_POST['username']) && isset($_POST['password']))
-	{
-    	$username = $_POST['username'];
-    	$password = $_POST['password'];
-
-		if (!User::authenticate($username, $password))
-		{
-			echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
-		}
-		else
-		{
-			header("Location: index.php");
-		}
-	}
-	elseif (isset($_POST['logout']))
-	{
-		if (User::isAuthenticated())
-		{
-			User::getCurrentUser()->logOut();
-		}
-	}
-?>
 <html>
 	<head>
 		<title>Submit It!</title>
@@ -56,6 +31,31 @@
 				</div>
 			</div>
 		</header>
+		<?php
+		require 'user.php';
+
+		if (isset($_POST['username']) && isset($_POST['password']))
+		{
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+
+			if (!User::authenticate($username, $password))
+			{
+				echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
+			}
+			else
+			{
+				header("Location: index.php");
+			}
+		}
+		elseif (isset($_POST['logout']))
+		{
+			if (User::isAuthenticated())
+			{
+				User::getCurrentUser()->logOut();
+			}
+		}
+		?>
 		<form action="login.php" method="post">
 			<br/>
 			<div name="usernameContainer">

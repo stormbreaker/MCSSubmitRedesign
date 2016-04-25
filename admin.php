@@ -6,6 +6,7 @@
         <script type="text/javascript" src="admin.js"></script>
     </head>
     <body>
+		<!--The html elements for professor and class administration-->
         <form action="admin.php" method="post">
             <label for="first">Professor's First Name: </label>
             <input type="text" name="first" id="first"/>
@@ -23,7 +24,7 @@
         <?php
             if(isset($_POST['execute']))
             {
-                //echo "grabbing professorName: \n";
+				//Create the folder for items submitted to this professor to be saved to
                 $proffolder = "";
                 $proffolder.= $_POST['first'][0];
                 for ($i = 0; $i < 7; $i++)
@@ -36,49 +37,37 @@
                 chdir($proffolder);
                 for ($i = 1; $i < $_POST['courseCount'] + 1; $i++)
                 {
-                    //echo 'classNumber'.$i."<br>";
+					//Create a folder for each course taught by this professor
                     $courseName = $_POST['classNumber'.$i];
-                    //echo $courseName."<br>";
-                    //echo getcwd();
                     mkdir($courseName, 0755);
                 }
-                $XMLDoc = new DOMDocument();
+                $XMLDoc = ne1w DOMDocument();
+				//Navigate up two levels in the directory structure
                 chdir("..");
                 chdir("..");
                 $XMLDoc->load('classes.xml');
 
-                //echo $XMLDoc->saveXML();
+				//Create a new xml node for the professor
                 $root = $XMLDoc->documentElement;
-
                 $tempProf = $XMLDoc->createElement("professor");
-
                 $professornamestr = $_POST['first']." ".$_POST['last'];
-
                 $profname = $XMLDoc->createElement("name", $professornamestr);
 
-
+				//Add XML for each course assigned to this professor
                 for ($i = 1; $i < $_POST['courseCount'] + 1; $i++)
                 {
-                    //echo 'classNumber'.$i."<br>";
                     $courseName = $_POST['classNumber'.$i];
-                    //echo $courseName."<br>";
-                    //echo getcwd();
 
                     $tempCourse = $XMLDoc->createElement("class", $courseName);
                     $tempProf->appendChild($tempCourse);
-
-
                 }
+
+				//Save the new professor back to the XML file
                 $tempProf->appendChild($profname);
                 $root->appendChild($tempProf);
-
                 $XMLDoc->appendChild($root);
 
                 echo "\n".$XMLDoc->save("classes.xml");
-
-            }
-            else
-            {
             }
         ?>
     </body>
