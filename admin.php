@@ -30,7 +30,7 @@
 				<br/>
 				<!--Navigation Menu-->
 				<div>
-					<div class="dropdown"> <a href="index.html">Home</a> </div>
+					<div class="dropdown"> <a href="MCS.html">Home</a> </div>
 					<div class="dropdown"> <a href="sinkhole.html">Alumni</a> </div>
 					<div class="dropdown"> <a href="sinkhole.html">Directory</a> </div>
 					<div class="dropdown"> <a href="sinkhole.html">Faculty</a> </div>

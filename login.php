@@ -25,7 +25,7 @@
         }
 
         // echo User::isAuthenticated()." ".$user->getUsername();
-        // echo User::isAuthenticated()." ".User::getUsername();
+        // escho User::isAuthenticated()." ".User::getUsername();
     }
 	elseif (isset($_POST['logout']))
 	{
