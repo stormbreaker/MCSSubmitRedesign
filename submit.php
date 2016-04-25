@@ -63,20 +63,22 @@
                 <img src="MCS_LOGO.png" class="imageProperties"/>
                 <br/>
                 <div>
-                    <div class="dropdown"> <a>Alumni</a> </div>
-                    <div class="dropdown"> <a>Directory</a> </div>
-                    <div class="dropdown"> <a>Faculty</a> </div>
-                    <div class="dropdown"> <a>Login</a> </div>
-                    <div class="dropdown"> <a>Map</a> </div>
-                    <div class="dropdown"> <a>Policy</a> </div>
-                    <div class="dropdown"> <a>Program</a> </div>
+                    <div class="dropdown"> <a href="index.html">Home</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Alumni</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Directory</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Faculty</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Map</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Policy</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Program</a> </div>
+                    <div class="dropdown"> <a href="sinkhole.html">Research</a> </div>
 
                     <div class="dropdown">
-                        <a>Research</a>
+                        <a>Student</a>
                         <div class="dropdown-content" id="myDropdown">
                             <a href="sinkhole.html">Checklist</a><br/>
                             <a href="sinkhole.html">Courses</a><br/>
                             <a href="sinkhole.html">Scheduler</a>
+                            <a href="submit.php">Submit It!</a>
                         </div>
                     </div>
 
@@ -92,7 +94,7 @@
             </div>
         </header>
 
-        <div>
+        <div class="divBorder">
             <h2> Welcome to Submit It!</h2>
 
             <p>Please select single or team project</p>
@@ -133,6 +135,10 @@
             	<br /> <br/>
             	<input type="submit" name="submit" value="Upload" />
             </form>
+        </div>
+
+        <div class="footerDiv">
+            <label class="footerElements"> MCS Telephone: 605-394-2471 </label>
         </div>
     </body>
 </html>
