@@ -6,7 +6,7 @@
     	$username = $_POST['UserName'];
     	$password = $_POST['Password'];
 
-		if (false)//!User::authenticate($username, $password))
+		if (!User::authenticate($username, $password))
 		{
 			echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
 		}

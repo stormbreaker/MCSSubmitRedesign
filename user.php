@@ -41,7 +41,7 @@ abstract class User
             $instance = $subclass::authenticate($username, $password);
             if ($instance != null)
             {
-                $_SESSION[self::SESSION_FIELD] = serialize($instance);
+                $_SESSION[self::SESSION_FIELD] = $instance->serialize();
                 return true;
             }
             else
@@ -64,8 +64,7 @@ abstract class User
      */
     public static function isAuthenticated()
     {
-        // return (self::getCurrentUser() != null);
-        return true;
+        return (self::getCurrentUser() != null);
     }
 
 
@@ -126,10 +125,7 @@ abstract class User
      * return string The username string for the user. For students, this will
      *               be a student ID, whereas faculty will have a faculty ID.
      */
-    public function getUsername()
-    {
-        return "test";
-    }
+    public abstract function getUsername();
 
 
     /**
@@ -180,5 +176,9 @@ abstract class User
     {
         self::$subclass = $subclass;
     }
+
+    public function serialize()
+    {
+      return serialize($this);
+    }
 }
-?>
