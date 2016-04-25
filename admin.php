@@ -76,17 +76,9 @@
 
                 echo "\n".$XMLDoc->save("classes.xml");
 
-
-                /*
-                foreach ($_POST as $key => $value)
-                {
-                    echo $key."=> $value <br>";
-                }
-                */
             }
             else
             {
-                echo "nope";
             }
         ?>
     </body>
