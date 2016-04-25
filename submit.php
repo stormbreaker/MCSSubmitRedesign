@@ -1,9 +1,60 @@
+
+<html>
+	<head>
+		<title>Submit It!</title>
+		<!-- stylesheet -->
+		<link rel="stylesheet" type="text/css" href="submitstyle.css"/>
+		<script type="text/javascript" src="submit.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<div class="minesGold">
+				<img src="MCS_LOGO.png" class="imageProperties"/>
+				<br/>
+				<div>
+					<div class="dropdown"> <a href="index.html">Home</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Alumni</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Directory</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Faculty</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Map</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Policy</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Program</a> </div>
+					<div class="dropdown"> <a href="sinkhole.html">Research</a> </div>
+
+					<div class="dropdown">
+						<a>Student</a>
+						<div class="dropdown-content" id="myDropdown">
+							<a href="sinkhole.html">Checklist</a><br/>
+							<a href="sinkhole.html">Courses</a><br/>
+							<a href="sinkhole.html">Scheduler</a>
+							<a href="submit.php">Submit It!</a>
+						</div>
+					</div>
+
+					<span class="loginfields" id="LoginDiv">
+						<form id="LoginForm" method="post" action="login.php">
+							<label>Username: </label>
+							<input type="text" id="UserName" name="UserName"/>
+							<label>Password: </label>
+							<input type="password" id="Password" name="Password"/>
+
+							<input type="button" value="Login" onclick="LoginUser();"/>
+						</form>
+					</span>
+
+					<span class="loginfields" style="display: none" id="LoggedInDiv">
+						<label id="lblLoggedIn"> Not logged in </label>
+					</span>
+				</div>
+			</div>
+		</header>
 <?php
 	require 'user.php';
 
-	if ($_FILES["file1"]["error"] > 0)
+	if (isset($_FILES["file1"]) && $_FILES["file1"]["error"] > 0)
 	{
-		echo "ERROR";
+		echo "<br/>You must select a file to upload!";
 	}
 	else if (isset($_POST['submit']))
 	{
@@ -12,93 +63,54 @@
         $className = $_POST["ClassCombo"];
         $fileName = $_FILES["file1"]["name"];
 		$names = explode(" ", trim($professorName));
-
-		$newFilePath = "submit/";
-		$newFilePath = $newFilePath . substr($names[0], 0, 1) . substr($names[1], 0, 7) . "/";
-		$newFilePath = $newFilePath . trim($className) . "/";
-
-		if (file_exists($newFilePath))
+		if ($professorName == "Choose Instructor" || $className == "Choose Class"
+			|| $className == "------------" || $professorName == "-----------------")
 		{
-			if ($_POST["project"] == "team")
-			{
-				$memberCount = $_POST["memberCount"];
-
-				for ($i = 0; $i < $memberCount; $i++)
-				{
-					$newFilePath = $newFilePath . $_POST["member".$i] . "_";
-				}
-			}
-
-			$newFilePath = $newFilePath . User::getUsername() . "_" . date("m") . "-" . date("d") . "-" . date("y") . "_" . date("H") . "-" . date("i") . "-" . date("s") . "_" . $fileName;
-			$index = 1;
-			$tempFilePath = $newFilePath;
-
-			while (file_exists($tempFilePath)) {
-				$pathPieces = explode(".", $newFilePath);
-				$tempFilePath = $pathPieces[0] . "(" . $index . ")" . $pathPieces[1];
-				$index = $index + 1;
-			}
-
-			move_uploaded_file($_FILES["file1"]["tmp_name"], $newFilePath);
-			echo "<script type='text/javascript'>alert('$fileName' + ' was successfully uploaded!');</script>";
+			echo "<br/>An instructor and class must both be selected";
 		}
 		else
 		{
-			echo "<script type='text/javascript'>alert('$fileName' + ' was not uploaded successfully. Please try again.');</script>";
+			$newFilePath = "submit/";
+			$newFilePath = $newFilePath . substr($names[0], 0, 1) . substr($names[1], 0, 7) . "/";
+			$newFilePath = $newFilePath . trim($className) . "/";
+
+			if (file_exists($newFilePath))
+			{
+				if ($_POST["project"] == "team")
+				{
+					$memberCount = $_POST["memberCount"];
+
+					for ($i = 0; $i < $memberCount; $i++)
+					{
+						$newFilePath = $newFilePath . $_POST["member".$i] . "_";
+					}
+				}
+
+				$newFilePath = $newFilePath . User::getUsername() . "_" . date("m") . "-" . date("d") . "-" . date("y") . "_" . date("H") . "-" . date("i") . "-" . date("s") . "_" . $fileName;
+				$index = 1;
+				$tempFilePath = $newFilePath;
+
+				while (file_exists($tempFilePath)) {
+					$pathPieces = explode(".", $newFilePath);
+					$tempFilePath = $pathPieces[0] . "(" . $index . ")" . $pathPieces[1];
+					$index = $index + 1;
+				}
+
+				if (move_uploaded_file($_FILES["file1"]["tmp_name"], $newFilePath))
+				{
+					echo "<script type='text/javascript'>alert('$fileName' + ' was successfully uploaded!');</script>";
+				}
+				else {
+					echo "<script type='text/javascript'>alert('$fileName' + ' was not uploaded successfully. Please try again.');</script>";
+				}
+			}
+			else
+			{
+				echo "<script type='text/javascript'>alert('$fileName' + ' was not uploaded successfully. Please try again.');</script>";
+			}
 		}
 	}
 ?>
-
-<html>
-    <head>
-        <title>Submit It!</title>
-        <!-- stylesheet -->
-        <link rel="stylesheet" type="text/css" href="submitstyle.css"/>
-        <script type="text/javascript" src="submit.js"></script>
-    </head>
-
-    <body>
-        <header>
-            <div class="minesGold">
-                <img src="MCS_LOGO.png" class="imageProperties"/>
-                <br/>
-                <div>
-                    <div class="dropdown"> <a href="index.html">Home</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Alumni</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Directory</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Faculty</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Map</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Policy</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Program</a> </div>
-                    <div class="dropdown"> <a href="sinkhole.html">Research</a> </div>
-
-                    <div class="dropdown">
-                        <a>Student</a>
-                        <div class="dropdown-content" id="myDropdown">
-                            <a href="sinkhole.html">Checklist</a><br/>
-                            <a href="sinkhole.html">Courses</a><br/>
-                            <a href="sinkhole.html">Scheduler</a>
-                            <a href="submit.php">Submit It!</a>
-                        </div>
-                    </div>
-
-                    <span class="loginfields" id="LoginDiv">
-                        <form id="LoginForm" method="post" action="login.php">
-                            <label>Username: </label>
-                            <input type="text" id="UserName" name="UserName"/>
-                            <label>Password: </label>
-                            <input type="password" id="Password" name="Password"/>
-
-                            <input type="button" value="Login" onclick="LoginUser();"/>
-                        </form>
-                    </span>
-
-                    <span class="loginfields" style="display: none" id="LoggedInDiv">
-                        <label id="lblLoggedIn"> Not logged in </label>
-                    </span>
-                </div>
-            </div>
-        </header>
 
         <div class="divBorder">
             <h2> Welcome to Submit It!</h2>
