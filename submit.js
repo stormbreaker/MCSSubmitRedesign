@@ -121,7 +121,57 @@ function SetClasses(sel)
 
 function LoginUser()
 {
-    var loginDiv = document.getElementById("LoginDiv").style.display = "none";
+    document.getElementById("LoginDiv").style.display = "none";
+    document.getElementById("LoggedInDiv").style.display = "block";
+    var username = document.getElementById("UserName").value;
+    var loggedInDiv = document.getElementById("lblLoggedIn");
+
+    var loginForm = document.getElementById("LoginForm");
+    loginForm.submit();
 }
 
-window.onload = function() { LoadProfessorsAndClasses(); };
+function CheckIfUserIsLoggedIn(isLoggedIn)
+{
+    var postData = "isAuthenticated=true";
+
+    if (window.XMLHttpRequest)
+    {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+            var result = xmlhttp.responseText.split(' ');
+
+            var isAuthenticated = result[0];
+
+            if (isAuthenticated == true)
+            {
+                document.getElementById("LoginDiv").style.display = "none";
+                document.getElementById("LoggedInDiv").style.display = "block";
+
+                document.getElementById("lblLoggedIn").innerHTML = "Welcome " + result[1] + "!";
+            }
+        }
+    };
+
+    xmlhttp.open("POST", "login.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.setRequestHeader("Content-length", postData.length);
+    xmlhttp.send(postData);
+}
+
+window.onload = function()
+{
+    CheckIfUserIsLoggedIn();
+
+    LoadProfessorsAndClasses();
+};

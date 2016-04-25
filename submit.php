@@ -83,12 +83,18 @@
                     </div>
 
                     <span class="loginfields" id="LoginDiv">
-                        <label>Username: </label>
-                        <input type="text" id="UserName"/>
-                        <label>Password: </label>
-                        <input type="password" id="Password"/>
+                        <form id="LoginForm" method="post" action="login.php">
+                            <label>Username: </label>
+                            <input type="text" id="UserName" name="UserName"/>
+                            <label>Password: </label>
+                            <input type="password" id="Password" name="Password"/>
 
-                        <input type="button" value="Login" onclick="LoginUser();"/>
+                            <input type="button" value="Login" onclick="LoginUser();"/>
+                        </form>
+                    </span>
+
+                    <span class="loginfields" style="display: none" id="LoggedInDiv">
+                        <label id="lblLoggedIn"> Not logged in </label>
                     </span>
                 </div>
             </div>
