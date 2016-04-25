@@ -110,5 +110,10 @@
                 echo "\n".$XMLDoc->save("classes.xml");
             }
         ?>
+
+        <div class="footerDiv">
+            <label class="footerElements"> MCS Telephone: 605-394-2471 </label>
+        </div>
+
     </body>
 </html>
