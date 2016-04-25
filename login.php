@@ -5,8 +5,8 @@
 		<link rel="stylesheet" type="text/css" href="submitstyle.css"/>
 		<script type="text/javascript" src="submit.js"></script>
 	</head>
-
 	<body>
+		<!--The standard page header-->
 		<header>
 			<div class="centerLR">
 				<img src="SDSMT_LOGO.png" width="75"/>
@@ -34,20 +34,24 @@
 		<?php
 		require 'user.php';
 
+		//If a login is requested
 		if (isset($_POST['username']) && isset($_POST['password']))
 		{
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 
+			//If the login fails, display an error
 			if (!User::authenticate($username, $password))
 			{
 				echo "<p>That username/password combination did not match anything in our records. Please try again.</p>";
 			}
+			//If the login is successful, redirect to the submission page
 			else
 			{
-				header("Location: index.php");
+				header("Location: submit.php");
 			}
 		}
+		//If a logout is requested
 		elseif (isset($_POST['logout']))
 		{
 			if (User::isAuthenticated())
@@ -58,6 +62,7 @@
 		?>
 		<form action="login.php" method="post">
 			<br/>
+			<!--If a login fails, this html will be displayed for another login attemp-->
 			<div name="usernameContainer">
 				<label style="display:inline-block; width:80px">Username: </label>
 				<input type="text" name="username">
