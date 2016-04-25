@@ -3,7 +3,7 @@
 
 	if ($_FILES["file1"]["error"] > 0)
 	{
-		echo "ERROR";
+		echo "A file must be selected to upload.";
 	}
 	else if (isset($_POST['submit']))
 	{
@@ -11,6 +11,11 @@
         $professorName = $_POST["InstructorCombo"];
         $className = $_POST["ClassCombo"];
         $fileName = $_FILES["file1"]["name"];
+		if ($professorName == "Choose Instructor" || $className == "Choose Class"
+			|| $className == "------------" || $professorName == "-----------------")
+		{
+			echo "An instructor and class must both be selected";
+		}
 		$names = explode(" ", trim($professorName));
 
 		$newFilePath = "submit/";

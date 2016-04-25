@@ -1,3 +1,21 @@
+<?php
+	require 'user.php';
+	User::declarePermission('canEditCourseInfo');
+
+	if (User::isAuthenticated())
+	{
+		$user = User::getCurrentUser();
+
+		if ($user->hasPermission('canEditCourseInfo') == false)
+		{
+			header("Location: submit.php");
+		}
+	}
+	else {
+			header("Location: submit.php");
+	}
+?>
+
 <html>
     <head>
         <title>
