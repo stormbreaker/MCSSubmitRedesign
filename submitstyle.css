@@ -25,12 +25,14 @@
 
 .dropdown:hover
 {
+    border-radius: 5px;
     background-color: #071D49;
     color: #ffffff;
 }
 
 .minesGold
 {
+    border-radius: 5px;
     background-color: #B3A369;
 }
 .minesBlue
@@ -49,12 +51,14 @@
     cursor: pointer; /*overrides php text thing*/
     padding: 10px 5px;
 }
+
 .loginfields
 {
+    float: right;
     position: relative;
-    display: inline-block;
-    padding: 20px 0px 0px 0px;
+    padding: 7.5px 5px;
 }
+
 .dropdown-content a
 {
     color: black;
@@ -70,4 +74,10 @@
 
 .teamMember{
     margin-top: 5px;
+}
+
+.imageProperties
+{
+    margin: 10px;
+    display: inline-block;
 }
