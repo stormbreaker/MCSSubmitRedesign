@@ -59,10 +59,10 @@
 
     <body>
         <header>
-            <div class="centerLR">
-                <img src="SDSMT_LOGO.png" width="75"/>
+            <div class="minesGold">
+                <img src="MCS_LOGO.png" class="imageProperties"/>
                 <br/>
-                <div class="minesGold">
+                <div>
                     <div class="dropdown"> <a>Alumni</a> </div>
                     <div class="dropdown"> <a>Directory</a> </div>
                     <div class="dropdown"> <a>Faculty</a> </div>
@@ -80,14 +80,14 @@
                         </div>
                     </div>
 
-                    <div class="loginfields" id="LoginDiv">
+                    <span class="loginfields" id="LoginDiv">
                         <label>Username: </label>
                         <input type="text" id="UserName"/>
                         <label>Password: </label>
                         <input type="password" id="Password"/>
 
                         <input type="button" value="Login" onclick="LoginUser();"/>
-                    </div>
+                    </span>
                 </div>
             </div>
         </header>
