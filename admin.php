@@ -60,7 +60,6 @@
             <br/>
             <input type="submit" name="execute" value="Add Professor and Classes" onclick="AddCourseDataXML()"/>
             <input type="text"  name="courseCount" id="courseCount" value="0" style="display:none">
-            <input type="button" name="updatexml" id="updatexml" value="Update XML Doc" onclick="AddCourseDataXML()"/>
         </form>
         <?php
             if(isset($_POST['execute']))
